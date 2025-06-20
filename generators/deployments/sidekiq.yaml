@@ -30,7 +30,6 @@ spec:
       labels:
         app: {{ .Chart.Name }}-%{name}
       annotations:
-        linkerd.io/inject: enabled
         kubectl.kubernetes.io/default-container: sidekiq
     spec:
       containers:
