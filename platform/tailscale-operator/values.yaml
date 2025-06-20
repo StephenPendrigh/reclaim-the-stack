@@ -1,0 +1,17 @@
+# oauth:
+#   clientId:
+#     valueFrom:
+#       secretKeyRef:
+#         name: tailscale-oauth
+#         key: client_id
+#   clientSecret:
+#     valueFrom:
+#       secretKeyRef:
+#         name: tailscale-oauth
+#         key: client_secret
+
+# operator:
+#   secretName: tailscale-oauth
+oauthSecretVolume:
+  secret:
+    secretName: tailscale-oauth
