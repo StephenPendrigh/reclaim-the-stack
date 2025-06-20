@@ -1,5 +1,6 @@
 resources:
   - ./namespace.yaml
+  - ./linkerd-grafana-auth-policy.yaml
 helmCharts:
   - name: kube-prometheus-stack
     repo: https://prometheus-community.github.io/helm-charts
@@ -49,6 +50,9 @@ helmCharts:
       grafana:
         defaultDashboardsTimezone: browser
         adminPassword: changeme
+        # Required for the Grafana -> Linkerd's prometheus instance AuthorizationPolicy to work
+        podAnnotations:
+          linkerd.io/inject: enabled
         service:
           annotations:
             "tailscale.com/expose": "true"
@@ -77,6 +81,10 @@ helmCharts:
             uid: loki
             type: loki
             url: http://qryn.logging.svc:3100
+          - name: linkerd
+            uid: linkerd
+            type: prometheus
+            url: http://prometheus.linkerd-viz.svc:9090
 
       prometheus-node-exporter:
         prometheus:

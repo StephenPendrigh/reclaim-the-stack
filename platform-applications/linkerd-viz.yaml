@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: linkerd-viz
+  namespace: argocd
+  annotations:
+    # Should not be applied before linkerd installation is completed
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  project: platform
+  source:
+    path: platform/linkerd-viz
+    repoURL: https://github.com/StephenPendrigh/reclaim-the-stack.git
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
+    syncOptions:
+      - ServerSideApply=true
