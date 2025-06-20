@@ -16,7 +16,6 @@ helmCharts:
       defaultRules:
         disabled:
           InfoInhibitor: true
-
       # Requires a ton of config
       alertmanager:
         enabled: false
@@ -54,6 +53,10 @@ helmCharts:
         # Required for the Grafana -> Linkerd's prometheus instance AuthorizationPolicy to work
         podAnnotations:
           linkerd.io/inject: enabled
+        service:
+          annotations:
+            "tailscale.com/expose": "true"
+            "tailscale.com/hostname": "monitoring-grafana"
         # admin:
         #   existingSecret: "<secret-name>"
         #   userKey: admin-user
