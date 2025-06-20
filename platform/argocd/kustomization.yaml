@@ -7,3 +7,4 @@ resources:
 # patches: { file: ./config.yaml } syntax results in a validation error.
 patchesStrategicMerge:
   - ./config.yaml
+  - ./argocd-server-service-patch.yaml
