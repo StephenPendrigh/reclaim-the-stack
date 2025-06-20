@@ -3,11 +3,11 @@ resources:
   - ./certificates.yaml
   - ./webhook-issuer-secret.yaml
 helmCharts:
-  - name: linkerd-crds
-    repo: https://helm.linkerd.io/stable
-    releaseName: linkerd-crds
-    version: 1.8.0
-    namespace: linkerd
+  # - name: linkerd-crds
+  #   repo: https://helm.linkerd.io/stable
+  #   releaseName: linkerd-crds
+  #   version: 1.8.0
+  #   namespace: linkerd
   - name: linkerd-control-plane
     repo: https://helm.linkerd.io/stable
     releaseName: linkerd
