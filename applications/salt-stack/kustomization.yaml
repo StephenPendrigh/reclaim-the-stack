@@ -1,0 +1,27 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: salt-stack
+
+configMapGenerator:
+- name: salt-master-config
+  files:
+    - saltconfig/etc/master
+    - saltconfig/etc/minion
+    - saltconfig/pillar/top.sls
+    - saltconfig/salt/top.sls
+
+resources:
+  - namespace.yaml
+  - 1-mariadb-secret.yaml
+  - 1-mariadb-initdb-configmap.yaml
+  - 2-mariadb-statefulset.yaml
+  - 2-mariadb-service.yaml
+  - 3-alcali-secret.yaml
+  - 4-alcali-deployment.yaml
+  - 4-alcali-service.yaml
+  - 6-salt-master-statefulset.yaml
+  - 6-salt-master-service.yaml
+
+generatorOptions:
+  disableNameSuffixHash: false

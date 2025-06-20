@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: salt-master
+spec:
+  serviceName: "salt-master"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: salt-master
+  template:
+    metadata:
+      labels:
+        app: salt-master
+    spec:
+      containers:
+        - name: salt-master
+          image: busybox:1.36
+          command: ["sh", "-c", "echo 'I am a placeholder pod, waiting for the real salt-master image.'; sleep infinity"]
+          env:
+            - name: PYTHONUNBUFFERED
+              value: "true"
+          ports:
+            - containerPort: 8080
+            - containerPort: 4505
+            - containerPort: 4506
+          volumeMounts:
+            - name: salt-config
+              mountPath: /etc/salt/master
+              subPath: master
+            - name: salt-config
+              mountPath: /etc/salt/minion
+              subPath: minion
+            - name: salt-config
+              mountPath: /srv/salt/top.sls
+              subPath: top.sls
+            - name: salt-config
+              mountPath: /srv/pillar/top.sls
+              subPath: top.sls
+
+            - name: pki-data
+              mountPath: /etc/salt/pki
+      volumes:
+        - name: salt-config
+          configMap:
+            # This name is determined by Kustomize from the generator
+            # It will be like 'salt-master-config-xxxxxxxxxx'
+            # The deployment will be updated automatically with the correct name.
+            name: salt-master-config
+
+  volumeClaimTemplates:
+    - metadata:
+        name: pki-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 100Mi

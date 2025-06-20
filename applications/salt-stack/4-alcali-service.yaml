@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: alcali
+spec:
+  type: NodePort # Use NodePort for easy access during development. Change to Ingress later.
+  ports:
+    - port: 8000
+      targetPort: 8000
+      nodePort: 30080 # A static port you can use to access Alcali from outside
+  selector:
+    app: alcali

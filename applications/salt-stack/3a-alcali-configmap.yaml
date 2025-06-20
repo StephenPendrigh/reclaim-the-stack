@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alcali-config
+stringData:
+  DB_BACKEND: mysql
+  DB_NAME: salt
+  DB_USER: alcali
+  DB_HOST: db
+  DB_PORT: "3306"
+  ALLOWED_HOSTS: "*"
+  MASTER_MINION_ID: master
+  SALT_URL: http://salt-master:8080
