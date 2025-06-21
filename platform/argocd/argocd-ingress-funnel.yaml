@@ -8,17 +8,9 @@ spec:
   ingressClassName: tailscale
   tls:
   - hosts:
-    - argocd-funnel
-  rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: argocd-server
-            port:
-              # The argocd-server service uses port 80 for http
-              # and 443 for https. Since the tailscale ingress
-              # terminates TLS, we connect to the http port.
-              number: 80
+    - funnel
+  deafaultBackend:
+    service:
+      name: funnel
+      port:
+        number: 80
