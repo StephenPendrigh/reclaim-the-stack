@@ -8,8 +8,8 @@ configMapGenerator:
   files:
     - saltconfig/etc/master
     - saltconfig/etc/minion
-    - saltconfig/pillar/top.sls
-    - saltconfig/salt/top.sls
+    # - saltconfig/pillar/top.sls
+    # - saltconfig/salt/top.sls
 
 resources:
   - namespace.yaml
