@@ -31,12 +31,12 @@ spec:
             - name: salt-config
               mountPath: /etc/salt/minion
               subPath: minion
-            - name: salt-config
-              mountPath: /srv/salt/top.sls
-              subPath: top.sls
-            - name: salt-config
-              mountPath: /srv/pillar/top.sls
-              subPath: top.sls
+            # - name: salt-config
+            #   mountPath: /srv/salt/top.sls
+            #   subPath: top.sls
+            # - name: salt-config
+            #   mountPath: /srv/pillar/top.sls
+            #   subPath: top.sls
 
             - name: pki-data
               mountPath: /etc/salt/pki
