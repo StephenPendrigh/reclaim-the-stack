@@ -11,6 +11,6 @@ spec:
     - funnel
   defaultBackend:
     service:
-      name: argoscd-server
+      name: argocd-server
       port:
         number: 80
