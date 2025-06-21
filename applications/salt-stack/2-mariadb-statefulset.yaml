@@ -13,6 +13,13 @@ spec:
       labels:
         app: mariadb
     spec:
+      volumes:
+        - name: mariadb-initdb
+          configMap:
+            name: mariadb-initdb-scripts
+            items:
+              - key: init.sql
+                path: init.sql
       containers:
         - name: mariadb
           image: mariadb:lts
