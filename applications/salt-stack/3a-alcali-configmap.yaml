@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: alcali-config
-stringData:
+data:
   DB_BACKEND: mysql
   DB_NAME: salt
   DB_USER: alcali
