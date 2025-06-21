@@ -25,3 +25,4 @@ resources:
 
 generatorOptions:
   disableNameSuffixHash: false
+#comment to test commit
