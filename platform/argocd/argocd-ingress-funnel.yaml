@@ -8,7 +8,7 @@ spec:
   ingressClassName: tailscale
   tls:
   - hosts:
-    - funnel
+    - argocd
   defaultBackend:
     service:
       name: argocd-server
