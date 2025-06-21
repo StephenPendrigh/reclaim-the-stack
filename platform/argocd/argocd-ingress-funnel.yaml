@@ -9,8 +9,8 @@ spec:
   tls:
   - hosts:
     - funnel
-  deafaultBackend:
+  defaultBackend:
     service:
-      name: funnel
+      name: argoscd-server
       port:
         number: 80
