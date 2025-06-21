@@ -17,7 +17,8 @@ resources:
   - 1-mariadb-initdb-configmap.yaml
   - 2-mariadb-statefulset.yaml
   - 2-mariadb-service.yaml
-  - 3-alcali-secret.yaml
+  - 3a-alcali-configmap.yaml
+  - 3b-alcali-sealedsecret.yaml
   - 4-alcali-deployment.yaml
   - 4-alcali-service.yaml
   - 6-salt-master-statefulset.yaml
