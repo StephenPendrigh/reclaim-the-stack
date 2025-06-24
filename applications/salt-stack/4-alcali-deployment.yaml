@@ -12,6 +12,46 @@ spec:
       labels:
         app: alcali
     spec:
+      initContainers:
+      - name: alcali-initialisation
+        image: latenighttales/alcali:3006.3.0
+        command: ['/bin/sh', '-c']
+        args:
+          - |
+            set -e # Exit script immediately if any command fails
+
+            echo "Waiting for database to be ready..."
+            until nc -zv $DB_HOST $DB_PORT; do echo "DB not yet available..."; sleep 2; done
+            echo "Database is ready."
+
+            echo "Checking for pending database migrations..."
+
+            if ! alcali migrate --plan | grep -q "No planned migration operations"; then
+
+              echo "Pending migrations detected. Running full setup..."
+
+              echo "Applying database migrations..."
+              alcali migrate
+
+              echo "Creating superuser..."
+              alcali createsuperuser --no-input --username admin --email admin@admin.com
+              
+              echo "Initial setup complete."
+            
+            else
+
+              echo "No pending migrations found. Skipping setup."
+
+            fi
+        envFrom:
+          - configMapRef:
+              name: alcali-config
+        env:
+        - name: DJANGO_SUPERUSER_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: alcali-secrets
+              key: ADMIN_PASSWORD
       containers:
         - name: alcali
           image: latenighttales/alcali:3006.3.0
