@@ -46,7 +46,7 @@ spec:
         envFrom:
           - configMapRef:
               name: alcali-config
-            secretRef:
+          - secretRef:
               name: alcali-secrets
         env:
         - name: DJANGO_SUPERUSER_PASSWORD
