@@ -13,11 +13,25 @@ spec:
       labels:
         app: salt-master
     spec:
+      volumes:
+        - name: salt-config-volume
+          emptyDir: {}
+      initContainers:
+        - name: git-clone-salt-config
+          image: alpine/git:latest
+          args:
+            - clone
+            - --single-branch
+            - --
+            - https://github.com/StephenPendrigh/reclaim-the-stack.git
+            - /repo
+          volumeMounts:
+          - name: salt-config-volume
+            mountPath: /repo
       containers:
         - name: salt-master
           image: salttake3-master:latest # This is a local image I pushed to k3s by running docker save salttake3-master:latest | sudo k3s ctr images import -
           imagePullPolicy: IfNotPresent
-#          command: ["sh", "-c", "echo 'I am a placeholder pod, waiting for the real salt-master image.'; sleep infinity"]
           env:
             - name: PYTHONUNBUFFERED
               value: "true"
@@ -26,24 +40,24 @@ spec:
             - containerPort: 4505
             - containerPort: 4506
           volumeMounts:
-            - name: salt-config
+            - name: salt-config-volume
+              subPath: reclaim-the-stack/applications/salt-stack/saltconfig/etc/master
               mountPath: /etc/salt/master
-              subPath: master
-            - name: salt-config
+
+            - name: salt-config-volume
+              subPath: reclaim-the-stack/applications/salt-stack/saltconfig/etc/minion
               mountPath: /etc/salt/minion
-              subPath: minion
-            # - name: salt-config
-            #   mountPath: /srv/salt/top.sls
-            #   subPath: top.sls
-            # - name: salt-config
-            #   mountPath: /srv/pillar/top.sls
-            #   subPath: top.sls
+
+            - name: salt-config-volume
+              subPath: reclaim-the-stack/applications/salt-stack/saltconfig/srv/pillar
+              mountPath: /srv/pillar
+
+            - name: salt-config-volume
+              subPath: reclaim-the-stack/applications/salt-stack/saltconfig/srv/salt
+              mountPath: /srv/salt
+              
             - name: pki-data
               mountPath: /etc/salt/pki
-      volumes:
-        - name: salt-config
-          configMap:
-            name: salt-master-config
   volumeClaimTemplates:
     - metadata:
         name: pki-data
