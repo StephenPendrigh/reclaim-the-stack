@@ -21,7 +21,7 @@ metadata:
   namespace: prometheus
 subjects:
   - kind: ServiceAccount
-    name: prometheus-stack-prometheus
+    name: prometheus-kube-prometheus-prometheus
     namespace: prometheus
 roleRef:
   kind: Role
