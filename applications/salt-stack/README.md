@@ -31,10 +31,10 @@ You hit alcali on internal port 8000, which is currently a Node Service exposed 
 
 Salt-master has a service file which exposes 8080 (salt-api), 4505 and 4506 which the salt minions hit (not yet tested with external minions)
 salt-master is a stateful set with the svc pki-data which stores all the keys for the accepted salt minions.
-It also has an init container git-clone-salt-config, which will run a git pull for the salt config and is mounted into the main container.
+It also has an init container git-clone-salt-config, which will run a git clone to obtain up-to-date master, state and pillar config. This is then mounted into the main container at the correct file paths.
 
 Currently salt-master config is set up with:
-A http server (rest_cherrypy) on port 8080, which has a self signed certificate (might need to be disabled or check the cert is actually auto created). This is the salt-api which alcali talks to.
+A http server (rest_cherrypy) on port 8080, which has a self signed certificate (might need to be disabled or check the cert is actually auto created during image creation...). This is the salt-api which alcali talks to.
 netapi_enable_clients enabled for salt-api to also work
 Config to send data to database and alcali
 auth_dirs: [/srv/salt/auth] (for the alcali auth - this is loaded into cache during the docker build?)
