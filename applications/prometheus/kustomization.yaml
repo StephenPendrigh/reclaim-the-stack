@@ -126,7 +126,7 @@ helmCharts:
                 - name: TS_STATEDIR
                   value: "/tmp"
               securityContext:
-                privileged: false
+                privileged: true
                 capabilities:
                   add:
                     - NET_ADMIN
