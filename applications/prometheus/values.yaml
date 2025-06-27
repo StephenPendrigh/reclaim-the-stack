@@ -46,46 +46,46 @@ prometheus:
         namespace: alertmanager
         port: 9093
     # Dynamic target scraping
-    volumes:
-      - name: external-targets
-        configMap:
-          name: prometheus-external-targets
-    volumeMounts:
-      - name: external-targets
-        mountPath: /etc/prometheus/targets
-        readOnly: true
-    additionalScrapeConfigs:
-      - job_name: 'file-sd-scrape'
-        # This tells Prometheus to read targets from our JSON file
-        file_sd_configs:
-        - files:
-          - '/etc/prometheus/targets/external-targets.json'
-    additionalContainers:
-      - name: tailscale-sidecar
-        image: tailscale/tailscale:latest
-        env:
-          - name: POD_NAME
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.name
-          - name: TS_AUTHKEY
-            valueFrom:
-              secretKeyRef:
-                name: tailscale-prom-sidecard-auth
-                key: TS_AUTHKEY
-          # This tells Tailscale where to store its state inside the cluster.
-          # It prevents the need to re-authenticate every time the pod restarts.
-          - name: TS_KUBE_SECRET
-            value: "tailscale-prom-sidecard-auth"
-          - name: TS_HOSTNAME
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.name
-          - name: TS_TAGS
-            value: "tag:k8s"
-        securityContext:
-          privileged: false
-          capabilities:
-            add:
-              - NET_ADMIN
-              - NET_RAW
+    # volumes:
+    #   - name: external-targets
+    #     configMap:
+    #       name: prometheus-external-targets
+    # volumeMounts:
+    #   - name: external-targets
+    #     mountPath: /etc/prometheus/targets
+    #     readOnly: true
+    # additionalScrapeConfigs:
+    #   - job_name: 'file-sd-scrape'
+    #     # This tells Prometheus to read targets from our JSON file
+    #     file_sd_configs:
+    #     - files:
+    #       - '/etc/prometheus/targets/external-targets.json'
+    # additionalContainers:
+    #   - name: tailscale-sidecar
+    #     image: tailscale/tailscale:latest
+    #     env:
+    #       - name: POD_NAME
+    #         valueFrom:
+    #           fieldRef:
+    #             fieldPath: metadata.name
+    #       - name: TS_AUTHKEY
+    #         valueFrom:
+    #           secretKeyRef:
+    #             name: tailscale-prom-sidecard-auth
+    #             key: TS_AUTHKEY
+    #       # This tells Tailscale where to store its state inside the cluster.
+    #       # It prevents the need to re-authenticate every time the pod restarts.
+    #       - name: TS_KUBE_SECRET
+    #         value: "tailscale-prom-sidecard-auth"
+    #       - name: TS_HOSTNAME
+    #         valueFrom:
+    #           fieldRef:
+    #             fieldPath: metadata.name
+    #       - name: TS_TAGS
+    #         value: "tag:k8s"
+    #     securityContext:
+    #       privileged: false
+    #       capabilities:
+    #         add:
+    #           - NET_ADMIN
+    #           - NET_RAW
