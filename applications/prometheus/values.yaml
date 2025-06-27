@@ -1,19 +1,35 @@
-grafana:
-  enabled: false
-kube-state-metrics:
+# We are providing our own rules via ConfigMap, so we don't need the defaults.
+defaultRules:
+  create: false
+
+# All of the following components are for scraping Kubernetes' own services.
+# We are not monitoring the cluster, so we disable them all.
+kubeApiServer:
   enabled: false
 kubelet:
   enabled: false
+kubeControllerManager:
+  enabled: false
+coreDns:
+  enabled: false
+kubeEtcd:
+  enabled: false
+kubeScheduler:
+  enabled: false
+kubeProxy:
+  enabled: false
+
+# These are the major sub-components we don't need.
+kube-state-metrics:
+  enabled: false
 prometheus-node-exporter:
+  enabled: false
+grafana:
   enabled: false
 alertmanager:
   enabled: false
 
 prometheus:
-  service:
-    annotations:
-      "tailscale.com/expose": "true"
-      "tailscale.com/hostname": "prometheus"
   prometheusSpec:
     storageSpec:
       volumeClaimTemplate:
