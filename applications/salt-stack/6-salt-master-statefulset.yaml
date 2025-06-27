@@ -28,7 +28,7 @@ spec:
           command: ['sh', '-c']
           args:
             - |
-              CONFIG_DIR="/repo/applications/salt-stack/saltconfig/etc/master.d"
+              CONFIG_DIR="/repo/applications/salt-stack/saltconfig/etc/salt/master.d"
               mkdir -p ${CONFIG_DIR}
 
               cat <<EOF > "${CONFIG_DIR}/mysql.conf"
@@ -40,7 +40,6 @@ spec:
               mysql.port: '${DB_PORT}'
               EOF
               echo "Secret Salt config snippet created at ${CONFIG_DIR}/mysql.conf"
-              sleep 120
           envFrom:
             - configMapRef:
                 name: alcali-config
