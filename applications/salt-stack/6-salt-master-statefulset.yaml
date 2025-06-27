@@ -40,13 +40,13 @@ spec:
             - containerPort: 4505
             - containerPort: 4506
           volumeMounts:
-            - name: salt-config-volume
-              subPath: reclaim-the-stack/applications/salt-stack/saltconfig/etc/master
-              mountPath: /etc/salt/master
+            # - name: salt-config-volume
+            #   subPath: reclaim-the-stack/applications/salt-stack/saltconfig/etc/master
+            #   mountPath: /etc/salt/master
 
-            - name: salt-config-volume
-              subPath: reclaim-the-stack/applications/salt-stack/saltconfig/etc/minion
-              mountPath: /etc/salt/minion
+            # - name: salt-config-volume
+            #   subPath: reclaim-the-stack/applications/salt-stack/saltconfig/etc/minion
+            #   mountPath: /etc/salt/minion
 
             - name: salt-config-volume
               subPath: reclaim-the-stack/applications/salt-stack/saltconfig/srv/pillar
