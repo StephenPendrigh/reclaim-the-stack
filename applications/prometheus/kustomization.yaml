@@ -58,6 +58,9 @@ helmCharts:
         enabled: false
       prometheus:
         prometheusSpec:
+          dnsConfig:
+            nameservers:
+              - 127.0.0.1
           storageSpec:
             volumeClaimTemplate:
               spec:
