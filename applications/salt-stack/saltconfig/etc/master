@@ -695,7 +695,7 @@ log_level_logfile: debug
 
 # List of git repositories to include with the local repo:
 #win_gitrepos:
-#  - 'https://github.com/saltstack/salt-winrepo.git'
+#  - 'https://github.com/saltstack/salt-winrepo.git' Test change to repos
 rest_cherrypy:
   port: 8080
   host: 0.0.0.0
