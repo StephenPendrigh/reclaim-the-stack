@@ -34,7 +34,8 @@ data:
     return hs
 
   # ArgoCD 3.x changed default tracking to annotation but the k CLI queries by labels
-  application.resourceTrackingMethod: label
+  # removed as not using k
+  # application.resourceTrackingMethod: label
 
   # Avoid colliding with Kubernetes default selector app.kubernetes.io/instance:
   # https://argo-cd.readthedocs.io/en/stable/faq/#why-is-my-app-out-of-sync-even-after-syncing

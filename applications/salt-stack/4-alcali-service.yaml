@@ -2,11 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: alcali
+  annotations:
+    tailscale.com/expose: "true"
+    tailscale.com/hostname: "alcali" 
 spec:
-  type: NodePort
   ports:
     - port: 8000
-      targetPort: 8000
-      nodePort: 30080
+      name: alcali
   selector:
     app: alcali

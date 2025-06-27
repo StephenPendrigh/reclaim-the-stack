@@ -1,16 +1,17 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: argocd-server-ingress
-  annotations:
-    tailscale.com/funnel: "true"
-spec:
-  ingressClassName: tailscale
-  tls:
-  - hosts:
-    - argocd
-  defaultBackend:
-    service:
-      name: argocd-server
-      port:
-        number: 443
+## Example of ingress to set up a tailscail funnel
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: argocd-server-ingress
+#   annotations:
+#     tailscale.com/funnel: "true"
+# spec:
+#   ingressClassName: tailscale
+#   tls:
+#   - hosts:
+#     - argocd
+#   defaultBackend:
+#     service:
+#       name: argocd-server
+#       port:
+#         number: 443

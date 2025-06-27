@@ -2,11 +2,11 @@ namespace: argocd
 resources:
   - ./namespace.yaml
   - https://raw.githubusercontent.com/argoproj/argo-cd/v3.0.6/manifests/install.yaml
-  - ./argocd-ingress-funnel.yaml
+  # - ./argocd-ingress-funnel.yaml
 
 
 # NOTE: patchesStrategicMerge is deprecated but still works. Converting to the suggested
 # patches: { file: ./config.yaml } syntax results in a validation error.
 patchesStrategicMerge:
   - ./config.yaml
-#  - ./argocd-server-service-patch.yaml
+  - ./argocd-server-service-patch.yaml
