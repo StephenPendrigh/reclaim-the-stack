@@ -39,7 +39,9 @@ helmCharts:
       kube-state-metrics:
         enabled: false
       prometheus-node-exporter:
-        enabled: false
+        prometheus:
+          monitor:
+            enabled: false
       grafana:
         enabled: false
       alertmanager:
