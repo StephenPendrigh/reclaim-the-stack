@@ -8,7 +8,7 @@ resources:
   - ./tailscale-prom-sidecar-sealedsecret.yaml
   - ./prometheus-rules-cm.yaml
   - ./prometheus-targets-cm.yaml
-  - ./tailscale-rbac.yam
+  - ./tailscale-rbac.yaml
 helmCharts:
   - name: kube-prometheus-stack
     repo: https://prometheus-community.github.io/helm-charts
