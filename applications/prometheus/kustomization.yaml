@@ -20,6 +20,7 @@ helmCharts:
     namespace: prometheus
     includeCRDs: true
     valuesInline:
+      namespaceOverride: "prometheus"
       defaultRules:
         create: false
       kubeApiServer:
@@ -62,7 +63,22 @@ helmCharts:
           ruleSelector:
             matchLabels:
               prometheus.io/rules: "true"
-          podMonitorSelectorNilUsesHelmValues: false
-          probeSelectorNilUsesHelmValues: false
-          ruleSelectorNilUsesHelmValues: false
-          serviceMonitorSelectorNilUsesHelmValues: false
+          alertingEndpoints:
+            - name: alertmanager-main
+              namespace: alertmanager
+              port: 9093
+          # Dynamic target scraping
+          volumes:
+            - name: external-targets
+              configMap:
+                name: prometheus-external-targets
+          volumeMounts:
+            - name: external-targets
+              mountPath: /etc/prometheus/targets
+              readOnly: true
+          additionalScrapeConfigs:
+            - job_name: 'file-sd-scrape'
+              # This tells Prometheus to read targets from our JSON file
+              file_sd_configs:
+              - files:
+                - '/etc/prometheus/targets/external-targets.json'
