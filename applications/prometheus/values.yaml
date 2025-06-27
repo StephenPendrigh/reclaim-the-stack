@@ -37,7 +37,7 @@ prometheus:
           accessModes: ["ReadWriteOnce"]
           resources:
             requests:
-              storage: 500Mi
+              storage: 100Mi
     ruleSelector:
       matchLabels:
         prometheus.io/rules: "true"
