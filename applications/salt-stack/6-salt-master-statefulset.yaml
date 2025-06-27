@@ -39,8 +39,8 @@ spec:
               mysql.db: '${DB_NAME}'
               mysql.port: '${DB_PORT}'
               EOF
-              echo "Secret Salt config snippet created at ${CONFIG_DIR}/mysql.conf
-              sleep 120"
+              echo "Secret Salt config snippet created at ${CONFIG_DIR}/mysql.conf"
+              sleep 120
           envFrom:
             - configMapRef:
                 name: alcali-config
