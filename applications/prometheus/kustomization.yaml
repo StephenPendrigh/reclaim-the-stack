@@ -115,18 +115,18 @@ helmCharts:
                   value: "tag:k8s"
                 - name: TS_USERSPACE
                   value: "false"
-                - name: TS_DEBUG_FIREWALL_MODE
-                  value: auto
+                # - name: TS_DEBUG_FIREWALL_MODE
+                #   value: auto
                 - name: POD_UID
                   valueFrom:
                     fieldRef:
                       fieldPath: metadata.uid
-                - name: TS_ACCEPT_DNS
-                  value: "true"
+                # - name: TS_ACCEPT_DNS
+                #   value: "true"
                 - name: TS_STATEDIR
                   value: "/tmp"
               securityContext:
-                privileged: true
+                privileged: false
                 capabilities:
                   add:
                     - NET_ADMIN
