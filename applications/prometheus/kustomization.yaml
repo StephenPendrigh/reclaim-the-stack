@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
   - namespace.yaml
-  - 
+  - tailscale-prom-sidecar-sealedsecret.yaml
   - prometheus-rules-cm.yaml
   - prometheus-targets-cm.yaml
 
