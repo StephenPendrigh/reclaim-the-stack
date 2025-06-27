@@ -55,6 +55,9 @@ spec:
             - name: salt-config-volume
               subPath: reclaim-the-stack/applications/salt-stack/saltconfig/srv/salt
               mountPath: /srv/salt
+
+            - name: salt-config-volume
+              mountPath: /repo
               
             - name: pki-data
               mountPath: /etc/salt/pki
