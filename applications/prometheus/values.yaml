@@ -60,7 +60,7 @@ prometheus:
         file_sd_configs:
         - files:
           - '/etc/prometheus/targets/external-targets.json'
-    containers:
+    additionalContainers:
       - name: tailscale-sidecar
         image: tailscale/tailscale:latest
         env:
