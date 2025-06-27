@@ -3,14 +3,6 @@ kind: Kustomization
 
 namespace: salt-stack
 
-configMapGenerator:
-- name: salt-master-config
-  files:
-    - saltconfig/etc/master
-    - saltconfig/etc/minion
-    # - saltconfig/pillar/top.sls
-    # - saltconfig/salt/top.sls
-
 resources:
   - namespace.yaml
   - 1-mariadb-secret.yaml
@@ -26,4 +18,3 @@ resources:
 
 generatorOptions:
   disableNameSuffixHash: false
-#comment to test commit
