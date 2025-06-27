@@ -31,13 +31,13 @@ alertmanager:
 
 prometheus:
   prometheusSpec:
-    storageSpec:
-      volumeClaimTemplate:
-        spec:
-          accessModes: ["ReadWriteOnce"]
-          resources:
-            requests:
-              storage: 100Mi
+    # storageSpec:
+    #   volumeClaimTemplate:
+    #     spec:
+    #       accessModes: ["ReadWriteOnce"]
+    #       resources:
+    #         requests:
+    #           storage: 100Mi
     ruleSelector:
       matchLabels:
         prometheus.io/rules: "true"
