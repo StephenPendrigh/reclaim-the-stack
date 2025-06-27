@@ -48,6 +48,16 @@ helmCharts:
         enabled: false
       prometheus:
         prometheusSpec:
+          storageSpec:
+            volumeClaimTemplate:
+              spec:
+                accessModes: ["ReadWriteOnce"]
+                resources:
+                  requests:
+                    storage: 100Mi
+          ruleSelector:
+            matchLabels:
+              prometheus.io/rules: "true"
           podMonitorSelectorNilUsesHelmValues: false
           probeSelectorNilUsesHelmValues: false
           ruleSelectorNilUsesHelmValues: false
