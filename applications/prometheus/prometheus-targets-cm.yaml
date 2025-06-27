@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-external-targets
+  labels:
+    # This label is not strictly required but good for organization
+    app.kubernetes.io/name: prometheus-external-targets
+data:
+  external-targets.json: |-
+    [
+      {
+        "targets": [
+          "octopi.munchkin-city.ts.net:9273"
+        ],
+        "labels": {
+          "job": "TEST"
+        }
+      }
+    ]
