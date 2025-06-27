@@ -114,7 +114,7 @@ helmCharts:
                 - name: TS_TAGS
                   value: "tag:k8s"
                 - name: TS_USERSPACE
-                  value: "false"
+                  value: "true"
                 - name: TS_DEBUG_FIREWALL_MODE
                   value: auto
                 - name: POD_UID
@@ -125,9 +125,9 @@ helmCharts:
                   value: "false"
                 - name: TS_STATEDIR
                   value: "/tmp"
-              securityContext:
-                privileged: true
-                capabilities:
-                  add:
-                    - NET_ADMIN
-                    - NET_RAW
+              # securityContext:
+              #   privileged: true
+              #   capabilities:
+              #     add:
+              #       - NET_ADMIN
+              #       - NET_RAW
