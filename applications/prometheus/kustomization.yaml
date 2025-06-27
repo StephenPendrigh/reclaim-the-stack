@@ -21,6 +21,10 @@ helmCharts:
     namespace: prometheus
     includeCRDs: true
     valuesInline:
+      crds:
+        enabled: false
+      prometheusOperator:
+        enabled: false
       namespaceOverride: "prometheus"
       defaultRules:
         create: false
