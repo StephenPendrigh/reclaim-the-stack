@@ -20,6 +20,28 @@ helmCharts:
     namespace: prometheus
     includeCRDs: true
     valuesInline:
+      defaultRules:
+        create: false
+      kubeApiServer:
+        enabled: false
+      kubelet:
+        enabled: false
+      kubeControllerManager:
+        enabled: false
+      coreDns:
+        enabled: false
+      kubeEtcd:
+        enabled: false
+      kubeScheduler:
+        enabled: false
+      kubeProxy:
+        enabled: false
+      kube-state-metrics:
+        enabled: false
+      prometheus-node-exporter:
+        enabled: false
+      grafana:
+        enabled: false
       alertmanager:
         enabled: false
       grafana:
