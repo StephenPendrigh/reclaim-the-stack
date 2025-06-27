@@ -125,7 +125,7 @@ helmCharts:
                   value: "true"
               securityContext:
                 privileged: true
-                # capabilities:
-                #   add:
-                #     - NET_ADMIN
-                #     - NET_RAW
+                capabilities:
+                  add:
+                    - NET_ADMIN
+                    - NET_RAW
