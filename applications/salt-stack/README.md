@@ -63,9 +63,7 @@ external_auth:
 ```
 
 
-Todo: Add tailscale exposure to service
-check works with external minions
-Some secrets in master config file. Need to separate out somehow
+Todo: Remove debug mode on salt-master
 Check that all works on fresh startup (notably the salt certs are actually generated)
 Use a fully pushed image rather than local image
 Tidy up docker image?
