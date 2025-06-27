@@ -110,9 +110,19 @@ helmCharts:
                       fieldPath: metadata.name
                 - name: TS_TAGS
                   value: "tag:k8s"
+                - name: TS_USERSPACE
+                  value: "false"
+                - name: TS_DEBUG_FIREWALL_MODE
+                  value: auto
+                - name: POD_UID
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: metadata.uid
+                - name: TS_ACCEPT_DNS
+                  value: "true"
               securityContext:
-                privileged: false
-                capabilities:
-                  add:
-                    - NET_ADMIN
-                    - NET_RAW
+                privileged: true
+                # capabilities:
+                #   add:
+                #     - NET_ADMIN
+                #     - NET_RAW
