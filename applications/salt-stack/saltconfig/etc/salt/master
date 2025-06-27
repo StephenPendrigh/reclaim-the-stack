@@ -77,7 +77,6 @@
 #verify_env: True
 
 # Set the number of hours to keep old job information in the job cache:
-keep_jobs: 0
 
 # Set the default timeout for the salt command and api. The default is 5
 # seconds.
@@ -123,10 +122,7 @@ keep_jobs: 0
 # memory. This value tunes the maximum size of a message allowed onto the
 # master event bus. The value is expressed in bytes.
 #max_event_size: 1048576
-event_return: [alcali]
-master_job_cache: alcali
 #job_cache_store_endtime: True
-
 
 # By default, the master AES key rotates every 24 hours. The next command
 # following a key rotation will trigger a key refresh from the minion which may
@@ -234,18 +230,6 @@ master_job_cache: alcali
 #   admin:
 #     - .*
 
-eauth_acl_module: alcali
-keep_acl_in_token: true
-
-external_auth:
-  alcali:
-    admin:
-      - '.*'
-      - '@local'
-      - '@runner'
-      - '@wheel'
-      - '@jobs'
-
 # Time (in seconds) for a newly generated token to live. Default: 12 hours
 #token_expire: 43200
 
@@ -279,7 +263,6 @@ external_auth:
 
 # Add any additional locations to look for master runners:
 #runner_dirs: []
-auth_dirs: [/srv/salt/auth]
 
 # Enable Cython for master side modules:
 #cython_enable: False
@@ -363,10 +346,6 @@ auth_dirs: [/srv/salt/auth]
 #   prod:
 #     - /srv/salt/prod/services
 #     - /srv/salt/prod/states
-
-file_roots:
-  base:
-    - /srv/salt
 
 # The hash_type is the hash to use when discovering the hash of a file on
 # the master server. The default is md5, but sha1, sha224, sha256, sha384
@@ -607,11 +586,11 @@ file_roots:
 
 # The level of messages to send to the console.
 # One of 'garbage', 'trace', 'debug', info', 'warning', 'error', 'critical'.
-log_level: debug
+log_level: info
 
 # The level of messages to send to the log file.
 # One of 'garbage', 'trace', 'debug', info', 'warning', 'error', 'critical'.
-log_level_logfile: debug
+log_level_logfile: info
 
 # The date and time format used in log messages. Allowed date/time formating
 # can be seen here: http://docs.python.org/library/time.html#time.strftime
@@ -661,20 +640,3 @@ log_level_logfile: debug
 # List of git repositories to include with the local repo:
 #win_gitrepos:
 #  - 'https://github.com/saltstack/salt-winrepo.git'
-rest_cherrypy:
-  port: 8080
-  host: 0.0.0.0
-  debug: False
-  ssl_crt: /etc/pki/tls/certs/localhost.crt
-  ssl_key: /etc/pki/tls/certs/localhost.key
-
-netapi_enable_clients:
-  - local
-  - local_async
-  - local_batch
-  - local_subset
-  - runner
-  - runner_async
-  - ssh
-  - wheel
-  - wheel_async

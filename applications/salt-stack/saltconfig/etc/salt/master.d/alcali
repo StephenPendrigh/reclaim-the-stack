@@ -1,0 +1,35 @@
+rest_cherrypy:
+  port: 8080
+  host: 0.0.0.0
+  debug: False
+  ssl_crt: /etc/pki/tls/certs/localhost.crt
+  ssl_key: /etc/pki/tls/certs/localhost.key
+
+netapi_enable_clients:
+  - local
+  - local_async
+  - local_batch
+  - local_subset
+  - runner
+  - runner_async
+  - ssh
+  - wheel
+  - wheel_async
+
+auth_dirs: [/srv/salt/auth]
+
+eauth_acl_module: alcali
+keep_acl_in_token: true
+
+external_auth:
+  alcali:
+    admin:
+      - '.*'
+      - '@local'
+      - '@runner'
+      - '@wheel'
+      - '@jobs'
+
+keep_jobs: 0
+event_return: [alcali]
+master_job_cache: alcali
