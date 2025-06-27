@@ -126,11 +126,6 @@ keep_jobs: 0
 event_return: [alcali]
 master_job_cache: alcali
 #job_cache_store_endtime: True
-mysql.host: 'db'
-mysql.user: 'alcali'
-mysql.pass: 'alcali'
-mysql.db: 'salt'
-mysql.port: 3306
 
 
 # By default, the master AES key rotates every 24 hours. The next command

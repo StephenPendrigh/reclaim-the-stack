@@ -19,12 +19,32 @@ spec:
       initContainers:
         - name: git-clone-salt-config
           image: alpine/git:latest
+          args: [ "clone", "--single-branch", "--", "https://github.com/StephenPendrigh/reclaim-the-stack.git", "/repo" ]
+          volumeMounts:
+          - name: salt-config-volume
+            mountPath: /repo
+        - name: create-secret-config
+          image: busybox:1.35
+          command: ['sh', '-c']
           args:
-            - clone
-            - --single-branch
-            - --
-            - https://github.com/StephenPendrigh/reclaim-the-stack.git
-            - /repo
+            - |
+              CONFIG_DIR="/repo/applications/salt-stack/saltconfig/etc/master.d"
+              mkdir -p ${CONFIG_DIR}
+
+              cat <<EOF > "${CONFIG_DIR}/mysql.conf"
+              # This file is auto-generated during pod initialization
+              mysql.host: '${DB_HOST}'
+              mysql.user: '${DB_USER}'
+              mysql.pass: '${DB_PASS}'
+              mysql.db: '${DB_NAME}'
+              mysql.port: '${DB_PORT}'
+              EOF
+              echo "Secret Salt config snippet created at ${CONFIG_DIR}/mysql.conf"
+          envFrom:
+            - configMapRef:
+                name: alcali-config
+            - secretRef:
+                name: alcali-secrets
           volumeMounts:
           - name: salt-config-volume
             mountPath: /repo
@@ -41,20 +61,12 @@ spec:
             - containerPort: 4506
           volumeMounts:
             - name: salt-config-volume
-              subPath: applications/salt-stack/saltconfig/etc/master
-              mountPath: /etc/salt/master
+              subPath: applications/salt-stack/saltconfig/etc/salt
+              mountPath: /etc/salt
 
             - name: salt-config-volume
-              subPath: applications/salt-stack/saltconfig/etc/minion
-              mountPath: /etc/salt/minion
-
-            - name: salt-config-volume
-              subPath: applications/salt-stack/saltconfig/srv/pillar
-              mountPath: /srv/pillar
-
-            - name: salt-config-volume
-              subPath: applications/salt-stack/saltconfig/srv/salt
-              mountPath: /srv/salt
+              subPath: applications/salt-stack/saltconfig/srv
+              mountPath: /srv
               
             - name: pki-data
               mountPath: /etc/salt/pki
