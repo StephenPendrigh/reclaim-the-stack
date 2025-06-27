@@ -114,7 +114,7 @@ helmCharts:
                 - name: TS_TAGS
                   value: "tag:k8s"
                 - name: TS_USERSPACE
-                  value: "true"
+                  value: "false"
                 - name: TS_DEBUG_FIREWALL_MODE
                   value: auto
                 - name: POD_UID
