@@ -239,29 +239,10 @@ mysql.port: 3306
 #   admin:
 #     - .*
 
-
 eauth_acl_module: alcali
 keep_acl_in_token: true
 
 external_auth:
-  rest:
-    ^url: http://web:8000/api/token/verify/
-    admin:
-      - '.*'
-      - '@runner'
-      - '@wheel'
-      - '@jobs'
-    apiuser:
-      - test.ping
-      - minion\*:
-          - network.*
-      - '@wheel':
-          - key.list_all
-      - minion2:
-          - network.*
-          - state.*
-      - 'G@os:RedHat':
-          - kmod.*
   alcali:
     admin:
       - '.*'
@@ -269,17 +250,6 @@ external_auth:
       - '@runner'
       - '@wheel'
       - '@jobs'
-    apiuser:
-      - test.ping
-      - minion\*:
-        - network.*
-      - '@wheel':
-        - key.list_all
-      - minion2:
-        - network.*
-        - state.*
-      - 'G@os:RedHat':
-        - kmod.*
 
 # Time (in seconds) for a newly generated token to live. Default: 12 hours
 #token_expire: 43200
@@ -695,7 +665,7 @@ log_level_logfile: debug
 
 # List of git repositories to include with the local repo:
 #win_gitrepos:
-#  - 'https://github.com/saltstack/salt-winrepo.git' Test change to repos
+#  - 'https://github.com/saltstack/salt-winrepo.git'
 rest_cherrypy:
   port: 8080
   host: 0.0.0.0

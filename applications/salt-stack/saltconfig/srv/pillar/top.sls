@@ -1,5 +1,3 @@
 base:
   '*':
     - default
-  'foobarbang':
-    - default
