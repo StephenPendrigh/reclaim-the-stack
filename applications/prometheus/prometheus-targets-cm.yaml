@@ -10,7 +10,7 @@ data:
     [
       {
         "targets": [
-          "octopi.munchkin-city.ts.net:9273"
+          "100.113.141.106:9273"
         ],
         "labels": {
           "job": "TEST"
